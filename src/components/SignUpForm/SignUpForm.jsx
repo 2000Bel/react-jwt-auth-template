@@ -1,11 +1,14 @@
 // SignUpForm.jsx
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
+import { UserContext } from '../../contexts/UserContext';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  // global context variables
+  const { setUser } = useContext(UserContext);
   // handles future error messages from the server
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
@@ -23,12 +26,14 @@ const SignUpForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    
+
     try {
-        const newUser = await signUp(formData);
-        console.log(newUser);
+      const newUser = await signUp(formData);
+      setUser(newUser);
+      console.log(newUser);
+      navigate('/');
     } catch (error) {
-        console.log(error);
+      console.log(error);
     };
   };
 
@@ -75,7 +80,7 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-            {/* can disable the button until form is valid */}
+          {/* can disable the button until form is valid */}
           <button disabled={isFormInvalid()}>Sign Up</button>
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
