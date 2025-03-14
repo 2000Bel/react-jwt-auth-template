@@ -1,9 +1,9 @@
-// src/components/NavBar/NavBar.jsx
+import { Link } from 'react-router';
 
 const NavBar = () => {
     return (
       <nav>
-        <p>Navbar contents will go here.</p>
+        <li><Link to='/sign-up'>Sign Up</Link></li>
       </nav>
     );
   };
