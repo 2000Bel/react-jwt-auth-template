@@ -8,9 +8,18 @@ const NavBar = () => {
 
   return (
     <nav>
-      <li><Link to='/sign-up'>Sign Up</Link></li>
+      {user ? (
+        <ul>
+          <li>Welcome, {user.username}</li>
+        </ul>
+      ) : (
+        <ul>
+          <li><Link to='/sign-up'>Sign Up</Link></li>
+        </ul>
+      )}
     </nav>
   );
 };
+
 
 export default NavBar;
